@@ -33,6 +33,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # 1}}}
+
+# Modified by Benjamin Weidig <github@seventyone.io> to support ECMAScript6 (.es6) files
 my $VERSION = sprintf("%.2f", 1.56);
 my $URL     = "http://cloc.sourceforge.net";
 require 5.006;
@@ -3854,6 +3856,7 @@ sub set_constants {                          # {{{1
             'ec'          => 'C'                     ,
             'el'          => 'Lisp'                  ,
             'erl'         => 'Erlang'                ,
+            'es6'         => 'ECMAScript6'           ,
             'exp'         => 'Expect'                ,
             'f77'         => 'Fortran 77'            ,
             'F77'         => 'Fortran 77'            ,
@@ -4124,6 +4127,11 @@ sub set_constants {                          # {{{1
                                 [ 'remove_matches'      , '^\s*%'  ], 
                                 [ 'remove_inline'       , '%.*$'   ],
                             ],
+	'ECMAScript6'         => [   
+								[ 'remove_matches'      , '^\s*//' ], 
+						        [ 'call_regexp_common'  , 'C'      ],
+						        [ 'remove_inline'       , '//.*$'  ], 
+						    ],
     'Expect'             => [   
                                 [ 'remove_matches'      , '^\s*#'  ], 
                                 [ 'remove_inline'       , '#.*$'   ],
@@ -4383,6 +4391,7 @@ sub set_constants {                          # {{{1
     'C#'                 =>     '\\\\$'         ,
     'D'                  =>     '\\\\$'         ,
     'Dart'               =>     '\\\\$'         ,
+    'ECMAScript6'        =>     '\\\\$'         ,
     'Expect'             =>     '\\\\$'         ,
     'Go'                 =>     '\\\\$'         ,
     'Java'               =>     '\\\\$'         ,
@@ -4782,8 +4791,9 @@ sub set_constants {                          # {{{1
     'j2ee'                         =>   1.60,
     'janus'                        =>   1.13,
     'Java'                         =>   1.36,
-'Javascript'                   =>   1.48,
-'JSP'                          =>   1.48,
+	'Javascript'                   =>   1.48,
+	'ECMAScript6'                  =>   1.48,
+	'JSP'                          =>   1.48,
     'JCL'                          =>   1.67,
     'joss'                         =>   0.75,
     'jovial'                       =>   0.75,
